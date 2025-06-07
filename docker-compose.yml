@@ -8,6 +8,7 @@ services:
       - ./:/var/www/html
       - ./docker/apache/httpd.conf:/etc/httpd/conf/httpd.conf
       - ./docker/apache/php.conf:/etc/httpd/conf.d/php.conf
+      - ./docker/apache/ssl.conf:/etc/httpd/conf.d/ssl.conf
       - ./docker/apache/disable-php-fpm.conf:/etc/httpd/conf.d/disable-php-fpm.conf
       - ./docker/apache/mpm_prefork.conf:/etc/httpd/conf.modules.d/00-mpm.conf
       - ./docker/apache/load-php-module.conf:/etc/httpd/conf.modules.d/10-php.conf
