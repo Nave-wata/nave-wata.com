@@ -1,92 +1,133 @@
 # nave-wata.com
 
-A PHP Slim Framework application with Docker and Docker Compose setup.
+A Japanese website built with PHP Slim Framework, Twig templating, and Docker.
 
-## Development Environment Setup
+## プロジェクト概要 (Project Overview)
 
-### Prerequisites
+このサイトは Slim PHP フレームワークと Twig テンプレートエンジンを使用して構築されています。Docker コンテナ化されており、開発環境の構築が容易です。
+
+## 開発環境のセットアップ (Development Environment Setup)
+
+### 前提条件 (Prerequisites)
 
 - Docker
 - Docker Compose
 
-### Environment Specifications
+### 環境仕様 (Environment Specifications)
 
 - Rocky Linux 8
 - PHP 8.2 with Apache
-- Composer 2.8
+- Composer 2.8.9
 - Slim Framework 4.x
-- All required PHP extensions installed
+- Twig Template Engine 3.x
+- 必要な PHP 拡張機能がすべてインストール済み
 
-### Getting Started
+### 始め方 (Getting Started)
 
-1. Clone this repository:
+1. リポジトリをクローンします:
    ```
    git clone https://github.com/your-username/nave-wata.com.git
    cd nave-wata.com
    ```
 
-2. Start the development environment:
+2. 開発環境を起動します:
    ```
-   docker-compose up
-   ```
-
-3. Install Slim Framework (first time only):
-   ```
-   docker-compose exec php composer create-project slim/slim-skeleton:4.* .
+   docker-compose up -d
    ```
 
-4. Access the application:
-   - Open your browser and navigate to http://localhost:8080
-   - You should see the Slim Framework welcome page
+3. 依存関係をインストールします (初回のみ):
+   ```
+   docker-compose exec php composer install
+   ```
 
-5. Development:
-   - The application code is in the `/var/www/html` directory inside the container
-   - Any changes to the source code will be reflected in the application
-   - Configuration files are in the `docker` directory and mounted as volumes
+4. アプリケーションにアクセスします:
+   - ブラウザで http://localhost:8080 にアクセスします
+   - Nave-Wata のホームページが表示されます
 
-### Configuration Files
+### プロジェクト構造 (Project Structure)
 
-The project uses configuration files stored in the `docker` directory:
+```
+nave-wata.com/
+├── composer.json      # PHP 依存関係の定義
+├── docker/            # Docker 設定ファイル
+│   ├── apache/        # Apache 設定
+│   └── php/           # PHP 設定と Dockerfile
+├── docker-compose.yml # Docker Compose 設定
+├── public/            # 公開ディレクトリ
+│   ├── index.php      # フロントコントローラー
+│   └── .htaccess      # Apache リライトルール
+├── templates/         # Twig テンプレート
+│   ├── layouts/       # レイアウトテンプレート
+│   └── *.twig         # ページテンプレート
+└── vendor/            # Composer 依存関係 (gitignore)
+```
 
-- Apache configuration:
-  - `docker/apache/httpd.conf`: Main Apache configuration file
-  - `docker/apache/15-php.conf`: PHP module configuration for Apache
-  - `docker/apache/slim.conf`: Slim Framework specific Apache configuration
-  - `docker/apache/00-base.conf`: Base modules configuration (enables rewrite module)
+## 設定ファイル (Configuration Files)
 
-- PHP configuration:
-  - `docker/php/php.ini`: PHP configuration file
+プロジェクトは `docker` ディレクトリに保存されている設定ファイルを使用しています:
 
-These files are mounted as volumes in the container, so any changes to them will be reflected in the container without rebuilding the image.
+### Apache 設定:
+- `docker/apache/httpd.conf`: メイン Apache 設定ファイル
+- `docker/apache/php.conf`: Apache 用 PHP モジュール設定
+- `docker/apache/ssl.conf`: SSL 設定 (ローカル開発では使用しない)
+- `docker/apache/disable-php-fpm.conf`: PHP-FPM を無効化する設定
+- `docker/apache/mpm_prefork.conf`: MPM Prefork 設定
+- `docker/apache/load-php-module.conf`: PHP モジュールの読み込み設定
 
-### Commands
+### PHP 設定:
+- `docker/php/php.ini`: PHP 設定ファイル
+- `docker/php/Dockerfile`: PHP コンテナのビルド設定
 
-- Start the development environment:
+これらのファイルはコンテナ内にボリュームとしてマウントされるため、イメージを再ビルドすることなく変更が反映されます。
+
+## コマンド (Commands)
+
+- 開発環境を起動:
   ```
   docker-compose up
   ```
 
-- Start in detached mode:
+- バックグラウンドで起動:
   ```
   docker-compose up -d
   ```
 
-- Stop the development environment:
+- 開発環境を停止:
   ```
   docker-compose down
   ```
 
-- Rebuild the Docker image:
+- Docker イメージを再ビルド:
   ```
   docker-compose build
   ```
 
-- Access the PHP container shell:
+- PHP コンテナのシェルにアクセス:
   ```
   docker-compose exec php bash
   ```
 
-- Run Composer commands:
+- Composer コマンドを実行:
   ```
   docker-compose exec php composer [command]
   ```
+
+## 開発ワークフロー (Development Workflow)
+
+1. ローカルでコードを変更します
+2. 変更はリアルタイムでコンテナに反映されます
+3. ブラウザで http://localhost:8080 にアクセスして変更を確認します
+4. 新しい依存関係を追加する場合は、`docker-compose exec php composer require [package]` を実行します
+
+## テンプレートシステム (Template System)
+
+このプロジェクトは Twig テンプレートエンジンを使用しています。テンプレートは `templates` ディレクトリにあります:
+
+- `templates/layouts/layout.twig`: ベースレイアウトテンプレート
+- `templates/top.twig`: ホームページテンプレート
+
+## セキュリティ (Security)
+
+- `.htaccess` ファイルへのアクセスは拒否されます
+- `index.php` 以外の PHP ファイルへの直接アクセスは拒否されます
+- ディレクトリインデックスは無効化されています
