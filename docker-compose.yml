@@ -1,0 +1,17 @@
+services:
+  php:
+    build:
+      context: docker/php
+      dockerfile: Dockerfile
+    container_name: slim-php
+    volumes:
+      - ./:/var/www/html
+      - ./docker/apache/httpd.conf:/etc/httpd/conf/httpd.conf
+      - ./docker/apache/php.conf:/etc/httpd/conf.d/php.conf
+      - ./docker/apache/disable-php-fpm.conf:/etc/httpd/conf.d/disable-php-fpm.conf
+      - ./docker/apache/mpm_prefork.conf:/etc/httpd/conf.modules.d/00-mpm.conf
+      - ./docker/apache/load-php-module.conf:/etc/httpd/conf.modules.d/10-php.conf
+      - ./docker/php/php.ini:/etc/opt/remi/php82/php.ini
+    ports:
+      - "8080:8080"
+    tty: true
