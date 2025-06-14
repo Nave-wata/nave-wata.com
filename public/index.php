@@ -1,25 +1,17 @@
 <?php
 
-use Slim\Factory\AppFactory;
-use Slim\Views\Twig;
-use Slim\Views\TwigMiddleware;
+/**
+ * アプリケーションのエントリーポイント
+ * 
+ * このファイルはウェブリクエストのエントリーポイントです。
+ * ブートストラップファイルを読み込み、アプリケーションを実行します。
+ * 
+ * クリーンアーキテクチャの原則に従い、このファイルはできるだけシンプルに保ち、
+ * 実際の初期化ロジックは別のファイルに分離しています。
+ */
 
-require __DIR__ . '/../vendor/autoload.php';
+// ブートストラップファイルを読み込み、アプリケーションを取得
+$app = require __DIR__ . '/../src/bootstrap.php';
 
-// Create App
-$app = AppFactory::create();
-
-// Create Twig
-$twig = Twig::create(__DIR__ . '/../templates', ['cache' => false]);
-
-// Add Twig-View Middleware
-$app->add(TwigMiddleware::create($app, $twig));
-
-// Define named route
-$app->get('/', function ($request, $response, $args) {
-    $view = Twig::fromRequest($request);
-    return $view->render($response, 'top.twig');
-});
-
-// Run app
+// アプリケーションを実行
 $app->run();

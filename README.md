@@ -1,5 +1,7 @@
 # nave-wata.com
 
+PHP Slim フレームワーク、Twig テンプレート、Docker を使用して構築された日本語のウェブサイトです。
+
 A Japanese website built with PHP Slim Framework, Twig templating, and Docker.
 
 ## プロジェクト概要 (Project Overview)
@@ -15,11 +17,11 @@ A Japanese website built with PHP Slim Framework, Twig templating, and Docker.
 
 ### 環境仕様 (Environment Specifications)
 
-- Rocky Linux 8
-- PHP 8.2 with Apache
-- Composer 2.8.9
-- Slim Framework 4.x
-- Twig Template Engine 3.x
+- Rocky Linux 8（ロッキー・リナックス 8）
+- PHP 8.2 with Apache（PHP 8.2 と Apache）
+- Composer 2.8.9（コンポーザー 2.8.9）
+- Slim Framework 4.x（スリム・フレームワーク 4.x）
+- Twig Template Engine 3.x（Twig テンプレートエンジン 3.x）
 - 必要な PHP 拡張機能がすべてインストール済み
 
 ### 始め方 (Getting Started)
@@ -41,93 +43,44 @@ A Japanese website built with PHP Slim Framework, Twig templating, and Docker.
    ```
 
 4. アプリケーションにアクセスします:
-   - ブラウザで http://localhost:8080 にアクセスします
-   - Nave-Wata のホームページが表示されます
+    - ブラウザで http://localhost:8080 にアクセスします
+    - Nave-Wata のホームページが表示されます
 
 ### プロジェクト構造 (Project Structure)
 
-```
-nave-wata.com/
-├── composer.json      # PHP 依存関係の定義
-├── docker/            # Docker 設定ファイル
-│   ├── apache/        # Apache 設定
-│   └── php/           # PHP 設定と Dockerfile
-├── docker-compose.yml # Docker Compose 設定
-├── public/            # 公開ディレクトリ
-│   ├── index.php      # フロントコントローラー
-│   └── .htaccess      # Apache リライトルール
-├── templates/         # Twig テンプレート
-│   ├── layouts/       # レイアウトテンプレート
-│   └── *.twig         # ページテンプレート
-└── vendor/            # Composer 依存関係 (gitignore)
-```
+プロジェクトはクリーンアーキテクチャに基づいた構造になっています。詳細な構造については [プロジェクト構造](docs/project_structure.md) を参照してください。
 
 ## 設定ファイル (Configuration Files)
 
-プロジェクトは `docker` ディレクトリに保存されている設定ファイルを使用しています:
-
-### Apache 設定:
-- `docker/apache/httpd.conf`: メイン Apache 設定ファイル
-- `docker/apache/php.conf`: Apache 用 PHP モジュール設定
-- `docker/apache/ssl.conf`: SSL 設定 (ローカル開発では使用しない)
-- `docker/apache/disable-php-fpm.conf`: PHP-FPM を無効化する設定
-- `docker/apache/mpm_prefork.conf`: MPM Prefork 設定
-- `docker/apache/load-php-module.conf`: PHP モジュールの読み込み設定
-
-### PHP 設定:
-- `docker/php/php.ini`: PHP 設定ファイル
-- `docker/php/Dockerfile`: PHP コンテナのビルド設定
-
-これらのファイルはコンテナ内にボリュームとしてマウントされるため、イメージを再ビルドすることなく変更が反映されます。
+プロジェクトで使用されている設定ファイルについては [設定ファイル](docs/configuration.md) を参照してください。
 
 ## コマンド (Commands)
 
-- 開発環境を起動:
-  ```
-  docker-compose up
-  ```
-
-- バックグラウンドで起動:
-  ```
-  docker-compose up -d
-  ```
-
-- 開発環境を停止:
-  ```
-  docker-compose down
-  ```
-
-- Docker イメージを再ビルド:
-  ```
-  docker-compose build
-  ```
-
-- PHP コンテナのシェルにアクセス:
-  ```
-  docker-compose exec php bash
-  ```
-
-- Composer コマンドを実行:
-  ```
-  docker-compose exec php composer [command]
-  ```
+プロジェクトで使用できるコマンドについては [コマンド](docs/commands.md) を参照してください。
 
 ## 開発ワークフロー (Development Workflow)
 
-1. ローカルでコードを変更します
-2. 変更はリアルタイムでコンテナに反映されます
-3. ブラウザで http://localhost:8080 にアクセスして変更を確認します
-4. 新しい依存関係を追加する場合は、`docker-compose exec php composer require [package]` を実行します
+プロジェクトの開発ワークフローについては [貢献ワークフロー](docs/contribution_workflow.md) を参照してください。
 
 ## テンプレートシステム (Template System)
 
-このプロジェクトは Twig テンプレートエンジンを使用しています。テンプレートは `templates` ディレクトリにあります:
-
-- `templates/layouts/layout.twig`: ベースレイアウトテンプレート
-- `templates/top.twig`: ホームページテンプレート
+プロジェクトで使用されているテンプレートシステムについては [テンプレートシステム](docs/template_system.md) を参照してください。
 
 ## セキュリティ (Security)
 
-- `.htaccess` ファイルへのアクセスは拒否されます
-- `index.php` 以外の PHP ファイルへの直接アクセスは拒否されます
-- ディレクトリインデックスは無効化されています
+プロジェクトで実装されているセキュリティ対策については [セキュリティ](docs/security.md) を参照してください。
+
+## ドキュメント (Documentation)
+
+プロジェクトに関する詳細なドキュメントは `docs` ディレクトリにあります:
+
+- [プロジェクト構造](docs/project_structure.md): プロジェクトのディレクトリ構造と各コンポーネントの役割
+- [クリーンアーキテクチャ](docs/clean_architecture.md): クリーンアーキテクチャの概要と実装方法
+- [設定ファイル](docs/configuration.md): プロジェクトで使用されている設定ファイルの説明
+- [コマンド](docs/commands.md): プロジェクトで使用できるコマンドの一覧と使用方法
+- [テンプレートシステム](docs/template_system.md): Twigテンプレートエンジンの使用方法
+- [セキュリティ](docs/security.md): プロジェクトで実装されているセキュリティ対策
+- [開発ガイドライン](docs/development_guidelines.md): コーディング規約、アーキテクチャガイドライン、テスト方法
+- [貢献ワークフロー](docs/contribution_workflow.md): プロジェクトへの貢献方法と変更を行うためのワークフロー
+
+これらのドキュメントは、プロジェクトの開発と保守を支援するために作成されています。新しい開発者がプロジェクトに参加する際や、既存の開発者が作業を行う際に参照してください。

@@ -13,6 +13,42 @@
             <li>軽量で高速な Slim フレームワーク</li>
             <li>柔軟で強力な Twig テンプレートエンジン</li>
             <li>モダンな PHP 開発手法</li>
+            <li>クリーンアーキテクチャに基づいた設計</li>
         </ul>
     </div>
+
+    <div class="architecture">
+        <h3>クリーンアーキテクチャ</h3>
+        <p>
+            このアプリケーションはクリーンアーキテクチャの原則に従って設計されています。
+            以下のレイヤーで構成されています：
+        </p>
+        <ul>
+            <li><strong>ドメイン層</strong>: ビジネスロジックとエンティティを含みます</li>
+            <li><strong>アプリケーション層</strong>: ユースケースを実装します</li>
+            <li><strong>インターフェース層</strong>: コントローラーとプレゼンターを含みます</li>
+            <li><strong>インフラストラクチャ層</strong>: 外部サービスとの連携を担当します</li>
+        </ul>
+    </div>
+{% endblock %}
+
+{% block head %}
+    <style>
+        .architecture {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+        .navigation ul, .architecture ul {
+            margin-left: 20px;
+        }
+        .navigation a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+    </style>
 {% endblock %}
