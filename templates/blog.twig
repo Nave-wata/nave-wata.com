@@ -1,0 +1,70 @@
+{% extends "layouts/layout.twig" %}
+
+{% block title %}ブログ - Nave-Wata{% endblock %}
+
+{% block content %}
+    <h2>ブログ記事一覧</h2>
+
+    <div class="navigation">
+        <h3>ナビゲーション</h3>
+        <ul>
+            <li><a href="/">ホーム</a></li>
+            <li><a href="/blog">ブログ</a></li>
+        </ul>
+    </div>
+
+    {% if posts is empty %}
+        <p>現在、ブログ記事はありません。</p>
+    {% else %}
+        <div class="blog-posts">
+            {% for post in posts %}
+                <article class="blog-post">
+                    <h3>{{ post.title.rendered|raw }}</h3>
+                    <div class="post-meta">
+                        <span class="post-date">{{ post.date|date("Y年m月d日") }}</span>
+                    </div>
+                    <div class="post-excerpt">
+                        {{ post.excerpt.rendered|raw }}
+                    </div>
+                    <a href="/blog/{{ post.id }}" class="read-more">続きを読む</a>
+                </article>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block head %}
+    <style>
+        .blog-posts {
+            margin-top: 20px;
+        }
+        .blog-post {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .blog-post h3 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .post-meta {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .post-excerpt {
+            margin-bottom: 15px;
+        }
+        .read-more {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 3px;
+        }
+        .read-more:hover {
+            background-color: #45a049;
+        }
+    </style>
+{% endblock %}

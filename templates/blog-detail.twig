@@ -1,0 +1,75 @@
+{% extends "layouts/layout.twig" %}
+
+{% block title %}{{ post.title.rendered|striptags }} - Nave-Wata{% endblock %}
+
+{% block content %}
+    <article class="blog-post-detail">
+        <h2>{{ post.title.rendered|raw }}</h2>
+        
+        <div class="post-meta">
+            <span class="post-date">{{ post.date|date("Y年m月d日") }}</span>
+        </div>
+        
+        <div class="post-content">
+            {{ post.content.rendered|raw }}
+        </div>
+        
+        <div class="post-navigation">
+            <a href="/blog" class="back-to-blog">ブログ一覧に戻る</a>
+        </div>
+    </article>
+{% endblock %}
+
+{% block head %}
+    <style>
+        .blog-post-detail {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .blog-post-detail h2 {
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 2em;
+        }
+        
+        .post-meta {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        
+        .post-content {
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        
+        .post-content img {
+            max-width: 100%;
+            height: auto;
+            margin: 15px 0;
+        }
+        
+        .post-navigation {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        .back-to-blog {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 3px;
+        }
+        
+        .back-to-blog:hover {
+            background-color: #45a049;
+        }
+    </style>
+{% endblock %}
