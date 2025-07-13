@@ -15,18 +15,13 @@ use App\Domain\Repositories\BlogRepositoryInterface;
 class GetBlogPostQueryHandler
 {
     /**
-     * @var BlogRepositoryInterface ブログリポジトリ
-     */
-    private BlogRepositoryInterface $blogRepository;
-
-    /**
      * コンストラクタ
      * 
      * @param BlogRepositoryInterface $blogRepository ブログリポジトリ
      */
-    public function __construct(BlogRepositoryInterface $blogRepository)
-    {
-        $this->blogRepository = $blogRepository;
+    public function __construct(
+        private BlogRepositoryInterface $blogRepository
+    ) {
     }
 
     /**

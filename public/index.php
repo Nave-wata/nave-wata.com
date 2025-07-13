@@ -10,8 +10,15 @@
  * 実際の初期化ロジックは別のファイルに分離しています。
  */
 
-// ブートストラップファイルを読み込み、アプリケーションを取得
-$app = require __DIR__ . '/../src/bootstrap.php';
+try {
+    // ブートストラップファイルを読み込み、アプリケーションを取得
+    $app = require __DIR__ . '/../src/bootstrap.php';
 
-// アプリケーションを実行
-$app->run();
+    // アプリケーションを実行
+    $app->run();
+} catch (\Throwable $e) {
+    echo $e->getMessage() . '<br><br>';
+    echo $e->getFile() . ':' . $e->getLine() . '<br><br>';
+    echo $e->getTraceAsString() . '<br><br>';
+    exit();
+}

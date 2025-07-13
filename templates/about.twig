@@ -1,0 +1,53 @@
+{% extends "layouts/layout.twig" %}
+
+{% block head %}
+    <link rel="stylesheet" href="/css/about.css">
+{% endblock %}
+
+{% block content %}
+    <div class="about-container">
+        <div class="about-header">
+            <h1>About</h1>
+            <p>エンジニアリングの知識や備忘録などを気が向けば投稿します</p>
+        </div>
+
+        <div class="about-content">
+            <div class="profile-section">
+                <div class="profile-headline">
+                    <h2>いつでも挑戦者</h2>
+                </div>
+
+                <div class="about-section">
+                    <div class="about-image">
+                        <img src="/img/author/nave-wata.webp" alt="Nave-wataについて" />
+                    </div>
+                    <div class="about-text">
+                        <div class="profile-info">
+                            <h3>NAVE</h3>
+                            <p class="role">Webエンジニア</p>
+                            <p class="location">群馬県</p>
+                            <p class="interests">サウナ・自然・旅行が好き</p>
+                        </div>
+
+                        <div class="biography">
+                            <p>新卒{{ job_age }}年目（25卒）のサーバサイドエンジニアです。</p>
+                            <p>メインはサーバサイドの開発ですが、フロント側やインフラ側についてもある程度触れてきたことがあります（ただしデザインは大の苦手です...）。プログラミングは大学生になる前くらいから本格的に始めていたので、歴としては約{{ engineer_age }}年になります。</p>
+                            <p>このサイトでは、以前から放置してきたレンタルサーバを活用するために、技術系のブログでも投稿していこうかと考えております。まだまだひよっこですので間違った内容を投稿することもあるかと思いますが、温かい目で見守ってください。</p>
+                        </div>
+
+                        <div class="social-links">
+                            <a href="#" class="social-link">X (Twitter)</a>
+                            <a href="#" class="social-link">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-section">
+                <h2>お問い合わせ</h2>
+                <p>ご質問、フィードバック、または協力のご提案がありましたら、お気軽にお問い合わせください。</p>
+                <a href="/contact" class="contact-button">お問い合わせページへ</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

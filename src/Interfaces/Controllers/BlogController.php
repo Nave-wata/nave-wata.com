@@ -24,26 +24,6 @@ use Twig\Error\SyntaxError;
 class BlogController
 {
     /**
-     * @var Twig Twigテンプレートエンジン
-     */
-    private Twig $view;
-
-    /**
-     * @var GetBlogPostsQueryHandler ブログ記事取得クエリハンドラ
-     */
-    private GetBlogPostsQueryHandler $getBlogPostsQueryHandler;
-
-    /**
-     * @var GetBlogPostQueryHandler 単一ブログ記事取得クエリハンドラ
-     */
-    private GetBlogPostQueryHandler $getBlogPostQueryHandler;
-
-    /**
-     * @var BlogPresenter ブログプレゼンター
-     */
-    private BlogPresenter $blogPresenter;
-
-    /**
      * コンストラクタ
      *
      * @param Twig $view Twigテンプレートエンジン
@@ -52,15 +32,11 @@ class BlogController
      * @param BlogPresenter $blogPresenter ブログプレゼンター
      */
     public function __construct(
-        Twig $view,
-        GetBlogPostsQueryHandler $getBlogPostsQueryHandler,
-        GetBlogPostQueryHandler $getBlogPostQueryHandler,
-        BlogPresenter $blogPresenter
+        private Twig $view,
+        private GetBlogPostsQueryHandler $getBlogPostsQueryHandler,
+        private GetBlogPostQueryHandler $getBlogPostQueryHandler,
+        private BlogPresenter $blogPresenter
     ) {
-        $this->view = $view;
-        $this->getBlogPostsQueryHandler = $getBlogPostsQueryHandler;
-        $this->getBlogPostQueryHandler = $getBlogPostQueryHandler;
-        $this->blogPresenter = $blogPresenter;
     }
 
     /**

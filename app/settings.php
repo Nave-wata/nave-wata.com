@@ -29,5 +29,6 @@ return [
     'wordpress' => [
         'baseUrl' => $_ENV['WP_BASE_URL'],
         'apiBasePath' => $_ENV['WP_API_BASE_PATH'],
+        'graphqlEndpoint' => $_ENV['WP_GRAPHQL_ENDPOINT'],
     ],
 ];

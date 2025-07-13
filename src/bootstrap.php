@@ -1,5 +1,6 @@
 <?php
 
+use App\Infrastructure\Services\TwigCategoryExtension;
 use DI\Bridge\Slim\Bridge;
 use DI\Container;
 use Slim\Views\Twig;
@@ -24,6 +25,7 @@ $container->set(Twig::class, function (Container $container) use ($settings) {
         'cache' => $settings['twig']['cache_path'],
         'debug' => $settings['twig']['debug'],
     ]);
+
     return $twig;
 });
 

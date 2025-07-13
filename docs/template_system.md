@@ -1,6 +1,6 @@
 # テンプレートシステム (Template System)
 
-このドキュメントでは、Nave-Wataプロジェクトで使用されているTwigテンプレートシステムについて説明します。
+このドキュメントでは、Nave-wataプロジェクトで使用されているTwigテンプレートシステムについて説明します。
 
 ## Twigテンプレートエンジン
 
@@ -32,12 +32,12 @@ Twigのテンプレート継承を使用して、共通のレイアウトを定�
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Nave-Wata{% endblock %}</title>
+    <title>{% block title %}Nave-wata{% endblock %}</title>
     {% block head %}{% endblock %}
 </head>
 <body>
     <header>
-        <h1>Nave-Wata</h1>
+        <h1>Nave-wata</h1>
         <nav>
             <!-- ナビゲーションメニュー -->
         </nav>
@@ -61,10 +61,10 @@ Twigのテンプレート継承を使用して、共通のレイアウトを定�
 ```twig
 {% extends "layouts/layout.twig" %}
 
-{% block title %}ホーム - Nave-Wata{% endblock %}
+{% block title %}ホーム - Nave-wata{% endblock %}
 
 {% block content %}
-    <h2>ようこそ Nave-Wata へ</h2>
+    <h2>ようこそ Nave-wata へ</h2>
     <p>
         このサイトは Slim PHP フレームワークと Twig テンプレートエンジンを使用して構築されています。
     </p>

@@ -11,26 +11,15 @@ namespace App\Application\Queries;
 class GetBlogPostsQuery
 {
     /**
-     * @var int 1ページあたりの記事数
-     */
-    private int $perPage;
-
-    /**
-     * @var int ページ番号
-     */
-    private int $page;
-
-    /**
      * コンストラクタ
      * 
-     * @param int|null $perPage 1ページあたりの記事数
-     * @param int|null $page ページ番号
+     * @param int $perPage 1ページあたりの記事数
+     * @param int $page ページ番号
      */
-    public function __construct(?int $perPage = null, ?int $page = null)
-    {
-        $this->perPage = $perPage ?? 10;
-        $this->page = $page ?? 1;
-
+    public function __construct(
+        private int $perPage = 10,
+        private int $page = 1
+    ) {
         // ページ番号は1以上であることを保証
         if ($this->page < 1) {
             $this->page = 1;
@@ -50,8 +39,8 @@ class GetBlogPostsQuery
      */
     public static function fromArray(array $queryParams): self
     {
-        $page = isset($queryParams['page']) ? (int)$queryParams['page'] : null;
-        $perPage = isset($queryParams['per_page']) ? (int)$queryParams['per_page'] : null;
+        $page = isset($queryParams['page']) ? (int)$queryParams['page'] : 1;
+        $perPage = isset($queryParams['per_page']) ? (int)$queryParams['per_page'] : 10;
 
         return new self($perPage, $page);
     }

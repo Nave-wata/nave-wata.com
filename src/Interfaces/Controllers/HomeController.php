@@ -2,6 +2,8 @@
 
 namespace App\Interfaces\Controllers;
 
+use App\Interfaces\Enum\PageEnum;
+use App\Interfaces\Services\MetaDataService;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Views\Twig;
@@ -11,25 +13,21 @@ use Twig\Error\SyntaxError;
 
 /**
  * ホームページのコントローラー
- * 
- * このクラスはホームページに関連するHTTPリクエストを処理します。
- * シンプルにビューを表示するだけの実装です。
+ *
+ * このクラスはホームページ（トップページ）に関連するHTTPリクエストを処理します。
+ * 単一責任原則に従い、ホームページのみを担当します。
+ * 静的なホームページを表示します。
  */
 class HomeController
 {
     /**
-     * @var Twig Twigテンプレートエンジン
-     */
-    private Twig $view;
-
-    /**
      * コンストラクタ
-     * 
+     *
      * @param Twig $view Twigテンプレートエンジン
      */
-    public function __construct(Twig $view)
-    {
-        $this->view = $view;
+    public function __construct(
+        private Twig $view
+    ) {
     }
 
     /**
@@ -44,6 +42,12 @@ class HomeController
      */
     public function home(Request $request, Response $response): Response
     {
-        return $this->view->render($response, 'top.twig');
+        return $this->view->render($response, 'top.twig', array_merge(
+            MetaDataService::get(PageEnum::HOME)->toArray(),
+            [
+                'job_age' => (int)date('n') >= 4 ? (int)date('Y') - 2024 : (int)date('Y') - 2025,
+                'engineer_age' => (int)date('Y') - 2020,
+            ],
+        ));
     }
 }

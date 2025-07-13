@@ -13,18 +13,13 @@ use InvalidArgumentException;
 class GetBlogPostQuery
 {
     /**
-     * @var int 記事ID
-     */
-    private int $id;
-
-    /**
      * コンストラクタ
      * 
      * @param int $id 記事ID
      */
-    public function __construct(int $id)
-    {
-        $this->id = $id;
+    public function __construct(
+        private int $id
+    ) {
     }
 
     /**

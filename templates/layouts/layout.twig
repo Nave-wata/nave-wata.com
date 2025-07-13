@@ -3,47 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Nave-Wata{% endblock %}</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            color: #333;
-        }
-        .container {
-            width: 80%;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        header {
-            background-color: #f4f4f4;
-            padding: 20px;
-            text-align: center;
-        }
-        footer {
-            background-color: #f4f4f4;
-            padding: 10px;
-            text-align: center;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-    </style>
+    {{ title|raw }}
+    {{ meta_description|raw }}
+
+    <!-- OGP Tags -->
+    {{ og_title|raw }}
+    {{ og_description|raw }}
+    {{ og_image|raw }}
+    {{ og_url|raw }}
+    {{ og_type|raw }}
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/main.css">
+
     {% block head %}{% endblock %}
 </head>
 <body>
-    <header>
-        <h1>Nave-Wata</h1>
+    <header class="site-header">
+        <div class="header-container">
+            <a href="/" class="site-logo">
+                <img src="/img/site-logo.webp" alt="Nave-wata Logo" />
+                <span class="site-title">Nave-wata</span>
+            </a>
+            <nav class="site-navigation">
+                <ul>
+                    <li><a href="/">ホーム</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/contact">お問い合わせ</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
-    
-    <div class="container">
+
+    <div class="container main-content">
         {% block content %}{% endblock %}
     </div>
-    
-    <footer>
-        <p>&copy; {{ "now"|date("Y") }} Nave-Wata. All rights reserved.</p>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <a href="/" class="footer-author">
+                    <img src="/img/author/nave-wata.webp" alt="著者プロフィール" width="50" height="50"/>
+                    <h3>Nave-wata</h3>
+                </a>
+                <p>エンジニアリングの知識や備忘録などを気が向けば投稿します</p>
+                <p>投稿内容を元になにか問題や不具合など発生してしまっても、<br class="min-md-br"/>何ら責任を負えませんのであしからず...</p>
+            </div>
+            <div class="footer-section">
+                <h3>リンク</h3>
+                <ul>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/contact">お問い合わせ</a></li>
+                    <li><a href="/privacy-policy">プライバシーポリシー</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; {{ "now"|date("Y") }} Nave-wata. All rights reserved.</p>
+        </div>
     </footer>
 </body>
 </html>
