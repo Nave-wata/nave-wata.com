@@ -1,0 +1,207 @@
+.about-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.about-header {
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.about-header h1 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.about-header p {
+    font-size: 1.2rem;
+    color: var(--light-text-color);
+}
+
+/* 共通セクションスタイル */
+.about-section, .section {
+    margin-bottom: 4rem;
+}
+
+.about-section {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+.about-image {
+    flex: 1;
+    text-align: center;
+}
+
+.about-image img {
+    max-width: 100%;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.about-text {
+    flex: 2;
+}
+
+/* 共通見出しスタイル */
+.section-title, .about-text h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.section-title::after, .about-text h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background-color: var(--accent-color);
+}
+
+.about-text p {
+    margin-bottom: 1rem;
+    line-height: 1.8;
+}
+
+/* 共通カードグリッドスタイル */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+/* 共通カードスタイル */
+.card {
+    background-color: var(--secondary-color);
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.card p {
+    color: var(--light-text-color);
+    line-height: 1.6;
+}
+
+.team-members {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.team-member {
+    background-color: var(--secondary-color);
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.member-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+}
+
+.team-member h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+}
+
+.member-role {
+    font-size: 0.9rem;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.member-bio {
+    color: var(--light-text-color);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.social-link {
+    padding: 0.3rem 0.8rem;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    transition: background-color 0.3s ease;
+}
+
+.social-link:hover {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.contact-section {
+    text-align: center;
+    padding: 3rem;
+    background-color: var(--secondary-color);
+    border-radius: 8px;
+}
+
+.contact-section p {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+
+.contact-button {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.contact-button:hover {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .about-section {
+        flex-direction: column;
+    }
+
+    .about-image {
+        order: -1;
+        margin-bottom: 2rem;
+    }
+
+    .card-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-section {
+        padding: 2rem 1rem;
+    }
+}

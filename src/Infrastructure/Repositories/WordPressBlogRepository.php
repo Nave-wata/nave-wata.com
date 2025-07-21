@@ -16,21 +16,6 @@ use GuzzleHttp\Exception\GuzzleException;
 class WordPressBlogRepository implements BlogRepositoryInterface
 {
     /**
-     * @var Client HTTPクライアント
-     */
-    private Client $httpClient;
-
-    /**
-     * @var string WordPressのベースURL
-     */
-    private string $wpBaseUrl;
-
-    /**
-     * @var string WordPressのAPIベースパス
-     */
-    private string $wpApiBasePath;
-
-    /**
      * コンストラクタ
      * 
      * @param Client $httpClient HTTPクライアント
@@ -38,13 +23,10 @@ class WordPressBlogRepository implements BlogRepositoryInterface
      * @param string $wpApiBasePath WordPressのAPIベースパス
      */
     public function __construct(
-        Client $httpClient,
-        string $wpBaseUrl,
-        string $wpApiBasePath
+        private Client $httpClient,
+        private string $wpBaseUrl,
+        private string $wpApiBasePath
     ) {
-        $this->httpClient = $httpClient;
-        $this->wpBaseUrl = $wpBaseUrl;
-        $this->wpApiBasePath = $wpApiBasePath;
     }
 
     /**

@@ -1,14 +1,15 @@
 <?php
 
-use App\Domain\Repositories\BlogRepositoryInterface;
-use App\Infrastructure\Repositories\WordPressBlogRepository;
 use DI\ContainerBuilder;
+use Slim\Views\Twig;
+use Twig\Loader\FilesystemLoader;
+use Twig\Loader\LoaderInterface;
 
 /**
  * 依存性注入コンテナの設定
- * 
+ *
  * このファイルはアプリケーションの依存性を設定します。
- * クリーンアーキテクチャに基づいて、各レイヤーの依存関係を管理します。
+ * 静的ページとホームページのための基本的な依存関係を管理します。
  */
 return function() {
     // 設定を読み込む
@@ -19,14 +20,11 @@ return function() {
 
     // 定義を設定
     $containerBuilder->addDefinitions([
-        // WordPressのAPI設定
-        'wpBaseUrl' => $settings['wordpress']['baseUrl'],
-        'wpApiBasePath' => $settings['wordpress']['apiBasePath'],
-
-        // リポジトリ
-        BlogRepositoryInterface::class => \DI\autowire(WordPressBlogRepository::class)
-            ->constructorParameter('wpBaseUrl', \DI\get('wpBaseUrl'))
-            ->constructorParameter('wpApiBasePath', \DI\get('wpApiBasePath')),
+        // Twig設定
+        LoaderInterface::class => \DI\create(FilesystemLoader::class)
+            ->constructor(__DIR__ . '/../templates'),
+        Twig::class => \DI\create(Twig::class)
+            ->constructor(\DI\get(LoaderInterface::class)),
     ]);
 
     // コンテナを構築して返す

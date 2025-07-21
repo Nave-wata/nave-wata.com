@@ -1,63 +1,34 @@
 {% extends "layouts/layout.twig" %}
 
-{% block title %}ホーム - Nave-Wata{% endblock %}
-
-{% block content %}
-    <h2>ようこそ Nave-Wata へ</h2>
-    <p>
-        このサイトは Slim PHP フレームワークと Twig テンプレートエンジンを使用して構築されています。
-    </p>
-
-    <div class="navigation">
-        <h3>ナビゲーション</h3>
-        <ul>
-            <li><a href="/">ホーム</a></li>
-            <li><a href="/blog">ブログ</a></li>
-        </ul>
-    </div>
-
-    <div class="features">
-        <h3>特徴</h3>
-        <ul>
-            <li>軽量で高速な Slim フレームワーク</li>
-            <li>柔軟で強力な Twig テンプレートエンジン</li>
-            <li>モダンな PHP 開発手法</li>
-            <li>クリーンアーキテクチャに基づいた設計</li>
-        </ul>
-    </div>
-
-    <div class="architecture">
-        <h3>クリーンアーキテクチャ</h3>
-        <p>
-            このアプリケーションはクリーンアーキテクチャの原則に従って設計されています。
-            以下のレイヤーで構成されています：
-        </p>
-        <ul>
-            <li><strong>ドメイン層</strong>: ビジネスロジックとエンティティを含みます</li>
-            <li><strong>アプリケーション層</strong>: ユースケースを実装します</li>
-            <li><strong>インターフェース層</strong>: コントローラーとプレゼンターを含みます</li>
-            <li><strong>インフラストラクチャ層</strong>: 外部サービスとの連携を担当します</li>
-        </ul>
-    </div>
-{% endblock %}
+{% block title %}ホーム{% endblock %}
 
 {% block head %}
-    <style>
-        .architecture {
-            margin-top: 30px;
-            padding: 15px;
-            background-color: #f9f9f9;
-            border-radius: 5px;
-        }
-        .navigation ul, .architecture ul {
-            margin-left: 20px;
-        }
-        .navigation a {
-            color: #4CAF50;
-            text-decoration: none;
-        }
-        .navigation a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/home.css">
+{% endblock %}
+
+{% block content %}
+    <div class="hero-section">
+        <!-- ヒーロー画像が必要: エンジニアリングをテーマにした画像 (サイズ: 1200x400px) -->
+        <img src="/img/home/mv.webp" alt="トップページ MV 画像" class="hero-image" />
+        <div class="hero-content">
+            <h1>Nave-wata's ブログ</h1>
+            <p>エンジニアリングの知識や備忘録などを気が向けば投稿します</p>
+        </div>
+    </div>
+
+    <div class="about-section">
+        <h2>Nave-wataについて</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>新卒{{ job_age }}年目（25卒）のサーバサイドエンジニアです。</p>
+                <p>メインはサーバサイドの開発ですが、フロント側やインフラ側についてもある程度触れてきたことがあります（ただしデザインは大の苦手です...）。プログラミングは大学生になる前くらいから本格的に始めていたので、歴としては約{{ engineer_age }}年になります。</p>
+                <br/>
+                <p>このサイトでは、以前から放置してきたレンタルサーバを活用するために、技術系のブログでも投稿していこうかと考えております。まだまだひよっこですので間違った内容を投稿することもあるかと思いますが、温かい目で見守ってください。</p>
+                <a href="/about" class="about-link">詳しく見る</a>
+            </div>
+            <div class="about-image">
+                <img src="/img/author/nave-wata.webp" alt="Nave-wataについて" width="240" height="240"/>
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -11,36 +11,6 @@ namespace App\Domain\Entities;
 class Blog
 {
     /**
-     * @var int 記事ID
-     */
-    private int $id;
-
-    /**
-     * @var string 記事タイトル
-     */
-    private string $title;
-
-    /**
-     * @var string 記事内容
-     */
-    private string $content;
-
-    /**
-     * @var string 記事抜粋
-     */
-    private string $excerpt;
-
-    /**
-     * @var \DateTimeImmutable 投稿日時
-     */
-    private \DateTimeImmutable $date;
-
-    /**
-     * @var string 記事URL
-     */
-    private string $link;
-
-    /**
      * コンストラクタ
      * 
      * @param int $id 記事ID
@@ -51,19 +21,13 @@ class Blog
      * @param string $link 記事URL
      */
     public function __construct(
-        int $id,
-        string $title,
-        string $content,
-        string $excerpt,
-        \DateTimeImmutable $date,
-        string $link
+        private int $id,
+        private string $title,
+        private string $content,
+        private string $excerpt,
+        private \DateTimeImmutable $date,
+        private string $link
     ) {
-        $this->id = $id;
-        $this->title = $title;
-        $this->content = $content;
-        $this->excerpt = $excerpt;
-        $this->date = $date;
-        $this->link = $link;
     }
 
     /**

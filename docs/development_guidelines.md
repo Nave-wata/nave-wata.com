@@ -1,6 +1,6 @@
 # 開発ガイドライン
 
-このドキュメントでは、Nave-Wataプロジェクトの開発ガイドラインとコーディング規約について説明します。
+このドキュメントでは、Nave-wataプロジェクトの開発ガイドラインとコーディング規約について説明します。
 
 ## 基本原則
 
@@ -16,13 +16,38 @@
    - コードを書く前に、その目的と設計を文書化する
    - PHPDocコメントを適切に記述する
 
+## 開発ワークフローとツール
+
+### Docker
+
+- **起動:** `docker-compose up -d`
+- **停止:** `docker-compose down`
+- **コンテナへのアクセス:** `docker-compose exec <service_name> bash`
+
+### Composer
+
+- **依存関係のインストール:** `docker-compose exec app composer install`
+- **新しい依存関係の追加:** `docker-compose exec app composer require <vendor>/<package>`
+- **開発用の依存関係の追加:** `docker-compose exec app composer require --dev <vendor>/<package>`
+
+### 静的解析
+
+コード品質を維持するため、[PHPStan](https://phpstan.org/) を使用します。コミット前に必ず実行してください。
+
+- **実行:** `docker-compose exec app vendor/bin/phpstan analyse`
+
+### コードフォーマット
+
+[PHP-CS-Fixer](https://cs.symfony.com/) を使用して、PSR-12コーディングスタイルを強制します。
+
+- **実行:** `docker-compose exec app vendor/bin/php-cs-fixer fix`
+
 ## コーディング規約
 
 ### PHP
 
-1. **PSR-1, PSR-2, PSR-12 の遵守**
+1. **PSR-1, PSR-12 の遵守**
    - [PSR-1: 基本コーディング規約](https://www.php-fig.org/psr/psr-1/)
-   - [PSR-2: コーディングスタイルガイド](https://www.php-fig.org/psr/psr-2/)
    - [PSR-12: 拡張コーディングスタイルガイド](https://www.php-fig.org/psr/psr-12/)
 
 2. **命名規則**
@@ -56,19 +81,21 @@
 
 ### Domain層
 
-- エンティティとビジネスロジックを含む
+- エンティティ、値オブジェクト、ドメインイベント、ビジネスロジックを含む
 - 外部のフレームワークやライブラリに依存しない
 - リポジトリのインターフェースを定義する
+- **値オブジェクト例:** `Email` や `Money` など、不変で単純な値を持つオブジェクト
 
 ### Application層
 
-- ユースケースを実装する
+- ユースケース（サービスクラス）を実装する
 - Domain層のエンティティとリポジトリインターフェースを使用する
-- 外部のフレームワークやライブラリに依存しない
+- DTO（Data Transfer Object）を使用して、レイヤー間のデータ転送を行う
+- **DTO vs エンティティ:** DTOは単なるデータコンテナであり、振る舞いを持たない。エンティティはドメインの核となるビジネスロジックとデータを持つ。
 
 ### Interfaces層
 
-- コントローラーとプレゼンターを含む
+- コントローラー、プレゼンター、コンソールコマンドを含む
 - HTTPリクエストの処理とレスポンスの生成を担当する
 - Application層のユースケースを使用する
 
@@ -76,32 +103,38 @@
 
 - 外部サービスとの連携を担当する
 - Domain層で定義されたリポジトリインターフェースを実装する
-- データベース、ファイルシステム、外部APIなどへのアクセスを担当する
+- データベース、ファイルシステム、外部API（WordPress GraphQL）などへのアクセスを担当する
 
 ## テスト
 
-1. **単体テスト**
-   - 各クラスの機能を個別にテストする
-   - モックを使用して依存関係を分離する
+### PHPUnit
 
-2. **統合テスト**
-   - 複数のコンポーネントの連携をテストする
-   - 実際のデータベースやファイルシステムを使用する
+テストフレームワークとして [PHPUnit](https://phpunit.de/) を使用します。
 
-3. **エンドツーエンドテスト**
-   - ユーザーの視点からアプリケーション全体の動作をテストする
-   - ブラウザの自動化ツールを使用する
+- **テストの実行:** `docker-compose exec app vendor/bin/phpunit`
+- **カバレッジレポートの生成:** `docker-compose exec app vendor/bin/phpunit --coverage-html coverage`
+
+### テストの構造
+
+- **単体テスト:** `tests/Unit`
+- **統合テスト:** `tests/Integration`
+- **E2Eテスト:** `tests/E2E`
 
 ## セキュリティガイドライン
 
 1. **入力検証**
-   - すべてのユーザー入力を検証する
-   - SQLインジェクションやXSSなどの攻撃を防止する
+   - [respect/validation](https://respect-validation.readthedocs.io/en/latest/) などのライブラリを使用して、すべてのユーザー入力を厳密に検証する
 
-2. **認証と認可**
-   - 適切な認証メカニズムを実装する
-   - 権限に基づいたアクセス制御を実装する
+2. **XSS対策**
+   - Twigの自動エスケープを常に有効にする。無効にする必要がある場合は、その理由を明確にコメントに残す
 
 3. **機密情報の保護**
-   - パスワードは適切にハッシュ化する
-   - APIキーなどの機密情報は環境変数で管理する
+   - APIキーなどの機密情報は `.env` ファイルで管理し、バージョン管理に含めない (`.env.example` を使用)
+   - [vlucas/phpdotenv](https://github.com/vlucas/phpdotenv) を使用して環境変数をロードする
+
+4. **セキュアなHTTPヘッダー**
+   - `Content-Security-Policy`, `Strict-Transport-Security`, `X-Frame-Options` などのヘッダーをミドルウェアで設定することを推奨
+
+## 貢献ワークフロー
+
+詳細な貢献手順については、[`contribution_workflow.md`](./contribution_workflow.md) を参照してください。
