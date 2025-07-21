@@ -1,5 +1,6 @@
 <?php
 
+use App\Application\Services\DateCalculationService;
 use App\Domain\Services\MetaDataServiceInterface;
 use App\Infrastructure\Services\MetaDataService;
 use App\Interfaces\Renderers\MetaTagRenderer;
@@ -31,6 +32,8 @@ return function() {
 
         // Service
         MetaDataServiceInterface::class => \DI\autowire(MetaDataService::class),
+        DateCalculationService::class => \DI\create(DateCalculationService::class)
+            ->constructor($settings['dates']),
 
         // Renderer
         MetaTagRenderer::class => \DI\autowire(MetaTagRenderer::class),

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Controllers;
 
+use App\Application\Services\DateCalculationService;
 use App\Domain\Services\MetaDataServiceInterface;
 use App\Interfaces\Enum\PageEnum;
 use App\Interfaces\Renderers\MetaTagRenderer;
@@ -20,11 +21,13 @@ readonly class StaticPageController
      * @param Twig $view
      * @param MetaDataServiceInterface $metaDataService
      * @param MetaTagRenderer $metaTagRenderer
+     * @param DateCalculationService $dateCalculationService
      */
     public function __construct(
         private Twig $view,
         private MetaDataServiceInterface $metaDataService,
-        private MetaTagRenderer $metaTagRenderer
+        private MetaTagRenderer $metaTagRenderer,
+        private DateCalculationService $dateCalculationService
     ) {
     }
 
@@ -44,8 +47,8 @@ readonly class StaticPageController
         return $this->view->render($response, 'about.twig', array_merge(
             $tags,
             [
-                'job_age' => (int)date('n') >= 4 ? (int)date('Y') - 2024 : (int)date('Y') - 2025,
-                'engineer_age' => (int)date('Y') - 2020,
+                'job_age' => $this->dateCalculationService->calculateJobAge(),
+                'engineer_age' => $this->dateCalculationService->calculateEngineerAge(),
             ],
         ));
     }

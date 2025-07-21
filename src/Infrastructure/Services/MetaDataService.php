@@ -21,9 +21,9 @@ class MetaDataService implements MetaDataServiceInterface
     private const META_DATA = [
         PageEnum::HOME->value => [
             'title' => 'ホーム',
-            'description' => '',
-            'og_image' => '',
-            'og_url' => '',
+            'description' => 'nave-wataのポートフォリオサイトです。Webエンジニアとしてのスキルやプロジェクトをご紹介します。',
+            'og_image' => '/img/home/home-page-preview.webp',
+            'og_url' => '/',
             'og_type' => OgpTypeEnum::WEBSITE,
         ],
         PageEnum::ABOUT->value => [

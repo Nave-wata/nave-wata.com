@@ -29,4 +29,11 @@ return [
         'apiBasePath' => $_ENV['WP_API_BASE_PATH'],
         'graphqlEndpoint' => $_ENV['WP_GRAPHQL_ENDPOINT'],
     ],
+
+    // 年数計算用の設定
+    'dates' => [
+        'job_start_year' => 2024,
+        'job_start_year_offset' => 2025, // 4月以前の場合に使用
+        'engineer_start_year' => 2020,
+    ],
 ];
