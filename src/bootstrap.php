@@ -1,6 +1,5 @@
 <?php
 
-use App\Infrastructure\Services\TwigCategoryExtension;
 use DI\Bridge\Slim\Bridge;
 use DI\Container;
 use Slim\Views\Twig;

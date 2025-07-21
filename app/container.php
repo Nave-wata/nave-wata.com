@@ -1,5 +1,8 @@
 <?php
 
+use App\Domain\Services\MetaDataServiceInterface;
+use App\Infrastructure\Services\MetaDataService;
+use App\Interfaces\Renderers\MetaTagRenderer;
 use DI\ContainerBuilder;
 use Slim\Views\Twig;
 use Twig\Loader\FilesystemLoader;
@@ -25,6 +28,12 @@ return function() {
             ->constructor(__DIR__ . '/../templates'),
         Twig::class => \DI\create(Twig::class)
             ->constructor(\DI\get(LoaderInterface::class)),
+
+        // Service
+        MetaDataServiceInterface::class => \DI\autowire(MetaDataService::class),
+
+        // Renderer
+        MetaTagRenderer::class => \DI\autowire(MetaTagRenderer::class),
     ]);
 
     // コンテナを構築して返す

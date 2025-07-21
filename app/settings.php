@@ -11,18 +11,16 @@ $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
 
 return [
-    'app' => [
-        // 表示設定
-        'displayErrorDetails' => true, // 開発環境では true、本番環境では false に設定
-        'logErrors' => true,
-        'logErrorDetails' => true,
-    ],
+    // アプリケーション基本設定
+    'displayErrorDetails' => $_ENV['APP_ENV'] !== 'production',
+    'logErrorDetails' => true,
+    'logErrors' => true,
 
     // Twigの設定
     'twig' => [
         'templates_path' => __DIR__ . '/../templates',
-        'cache_path' => false, // キャッシュを無効化（本番環境ではパスを設定）
-        'debug' => true,
+        'cache_path' => $_ENV['APP_ENV'] === 'production' ? __DIR__ . '/../var/cache/twig' : false,
+        'debug' => $_ENV['APP_ENV'] === 'development',
     ],
 
     // WordPressのAPI設定
