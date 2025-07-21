@@ -1,0 +1,75 @@
+{% extends "layouts/layout.twig" %}
+
+{% block head %}
+    <link rel="stylesheet" href="/css/contact.css">
+{% endblock %}
+
+{% block content %}
+    <div class="contact-container">
+        <div class="contact-header">
+            <h1>お問い合わせ</h1>
+            <p>ご質問やフィードバックをお寄せください</p>
+        </div>
+
+        <div class="contact-content">
+            <div class="contact-info">
+                <div class="info-card">
+                    <div class="info-icon">
+                        <!-- 連絡先アイコンが必要: メールを表すアイコン (サイズ: 48x48px) -->
+                        <img src="#" alt="メール" />
+                    </div>
+                    <h3>メール</h3>
+                    <p>info@nave-wata.com</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">
+                        <!-- 連絡先アイコンが必要: SNSを表すアイコン (サイズ: 48x48px) -->
+                        <img src="#" alt="SNS" />
+                    </div>
+                    <h3>SNS</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-link">Twitter</a>
+                        <a href="#" class="social-link">GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form-container">
+                <h2>お問い合わせフォーム</h2>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name">お名前 <span class="required">*</span></label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">メールアドレス <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">件名 <span class="required">*</span></label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">メッセージ <span class="required">*</span></label>
+                        <textarea id="message" name="message" rows="6" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="category">お問い合わせカテゴリ</label>
+                        <select id="category" name="category">
+                            <option value="general">一般的なお問い合わせ</option>
+                            <option value="technical">技術的な質問</option>
+                            <option value="collaboration">協力・提携のご提案</option>
+                            <option value="feedback">フィードバック</option>
+                            <option value="other">その他</option>
+                        </select>
+                    </div>
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="privacy" name="privacy" required>
+                        <label for="privacy">プライバシーポリシーに同意します <span class="required">*</span></label>
+                    </div>
+                    <button type="submit" class="submit-button">送信する</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

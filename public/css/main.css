@@ -1,0 +1,232 @@
+:root {
+    --primary-color: #3a5a78;
+    --secondary-color: #f0f5f9;
+    --accent-color: #4a7baa;
+    --text-color: #333;
+    --light-text-color: #666;
+    --border-color: #e0e0e0;
+    --background-color: #fff;
+    --footer-background: #f8f9fa;
+    --header-background: #fff;
+    --code-background: #f5f7f9;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    line-height: 1.8;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--primary-color);
+}
+
+.site-header {
+    background-color: var(--header-background);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.site-logo {
+    display: flex;
+    align-items: center;
+}
+
+.site-logo img {
+    height: 40px;
+    margin-right: 10px;
+}
+
+.site-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.site-navigation ul {
+    display: flex;
+    list-style: none;
+}
+
+.site-navigation li {
+    margin-left: 2rem;
+}
+
+.site-navigation a {
+    font-weight: 500;
+    padding: 0.5rem 0;
+    position: relative;
+}
+
+.site-navigation a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--accent-color);
+    transition: width 0.3s ease;
+}
+
+.site-navigation a:hover::after {
+    width: 100%;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+.main-content {
+    min-height: calc(100vh - 200px);
+}
+
+.site-footer {
+    background-color: var(--footer-background);
+    padding: 2rem 0;
+    margin-top: 3rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 250px;
+    margin-bottom: 1.5rem;
+    margin-right: 2rem;
+}
+
+.footer-section .footer-author {
+    display: flex;
+    margin-bottom: 1rem;
+    align-items: center;
+}
+
+.footer-section .footer-author img {
+    margin-right: 0.8rem;
+    border-radius: 50%;
+}
+
+.footer-section .footer-author h3 {
+    font-size: 1.6rem;
+}
+
+.footer-section h3 {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+}
+
+.footer-section p {
+    font-size: 0.9rem;
+}
+
+.footer-section p .min-md-br {
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .footer-section p .min-md-br {
+        display: none;
+    }
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 1.5rem;
+    margin-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+    color: var(--light-text-color);
+    font-size: 0.9rem;
+}
+
+/* Code blocks styling for engineering blog */
+pre, code {
+    font-family: 'Source Code Pro', monospace;
+    background-color: var(--code-background);
+    border-radius: 4px;
+}
+
+pre {
+    padding: 1rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    border: 1px solid var(--border-color);
+}
+
+code {
+    padding: 0.2rem 0.4rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .site-navigation {
+        margin-top: 1rem;
+    }
+
+    .site-navigation ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .site-navigation li {
+        margin: 0.5rem 0;
+    }
+
+    .container {
+        padding: 0 1rem;
+    }
+
+    .footer-section {
+        flex: 100%;
+    }
+}

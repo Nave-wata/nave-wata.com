@@ -24,6 +24,7 @@ $container->set(Twig::class, function (Container $container) use ($settings) {
         'cache' => $settings['twig']['cache_path'],
         'debug' => $settings['twig']['debug'],
     ]);
+
     return $twig;
 });
 

@@ -44,7 +44,7 @@ A Japanese website built with PHP Slim Framework, Twig templating, and Docker.
 
 4. アプリケーションにアクセスします:
     - ブラウザで http://localhost:8080 にアクセスします
-    - Nave-Wata のホームページが表示されます
+    - Nave-wata のホームページが表示されます
 
 ### プロジェクト構造 (Project Structure)
 

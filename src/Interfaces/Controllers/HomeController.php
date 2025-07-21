@@ -1,7 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Interfaces\Controllers;
 
+use App\Application\Services\DateCalculationService;
+use App\Domain\Services\MetaDataServiceInterface;
+use App\Interfaces\Enum\PageEnum;
+use App\Interfaces\Renderers\MetaTagRenderer;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Views\Twig;
@@ -11,25 +17,27 @@ use Twig\Error\SyntaxError;
 
 /**
  * ホームページのコントローラー
- * 
- * このクラスはホームページに関連するHTTPリクエストを処理します。
- * シンプルにビューを表示するだけの実装です。
+ *
+ * このクラスはホームページ（トップページ）に関連するHTTPリクエストを処理します。
+ * 単一責任原則に従い、ホームページのみを担当します。
+ * 静的なホームページを表示します。
  */
-class HomeController
+readonly class HomeController
 {
     /**
-     * @var Twig Twigテンプレートエンジン
-     */
-    private Twig $view;
-
-    /**
      * コンストラクタ
-     * 
+     *
      * @param Twig $view Twigテンプレートエンジン
+     * @param MetaDataServiceInterface $metaDataService メタデータサービス
+     * @param MetaTagRenderer $metaTagRenderer メタタグレンダラー
+     * @param DateCalculationService $dateCalculationService 日付計算サービス
      */
-    public function __construct(Twig $view)
-    {
-        $this->view = $view;
+    public function __construct(
+        private Twig $view,
+        private MetaDataServiceInterface $metaDataService,
+        private MetaTagRenderer $metaTagRenderer,
+        private DateCalculationService $dateCalculationService
+    ) {
     }
 
     /**
@@ -44,6 +52,15 @@ class HomeController
      */
     public function home(Request $request, Response $response): Response
     {
-        return $this->view->render($response, 'top.twig');
+        $metaData = $this->metaDataService->getMetaData(PageEnum::HOME);
+        $tags = $this->metaTagRenderer->renderTags($metaData);
+
+        return $this->view->render($response, 'top.twig', array_merge(
+            $tags,
+            [
+                'job_age' => $this->dateCalculationService->calculateJobAge(),
+                'engineer_age' => $this->dateCalculationService->calculateEngineerAge(),
+            ],
+        ));
     }
 }
